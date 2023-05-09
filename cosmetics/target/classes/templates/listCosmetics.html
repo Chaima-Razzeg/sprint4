@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>List of cosmetic products</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+List of cosmetic products </div>
+ <div class="card-body"> 
+ <table class="table table-striped">
+ <tr>
+ <th>Reference</th><th>Cosmetic name </th><th>Item price</th><th>Rayon</th><th>Delete</th><th>Edit</th>
+ </tr> 
+ <tr th:each="p:${cosmetics.content}">
+ <td th:text="${p.cosmeticReference}"></td>
+ <td th:text="${p.cosmeticName}"></td>
+ <td th:text="${p.itemPrice}"></td> 
+ <td th:text="${p.rayon != null ? p.rayon.nameRan : ''}"></td>
+<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"  onclick="return confirm('Are you sure ?')" th:href="@{supprimerCosmetic(id=${p.cosmeticReference},
+page=${currentPage},size=${size})}">Delete</a></td>
+                       <td sec:authorize="hasRole('ADMIN')">
+<a class="btn btn-primary" th:href="@{modifierCosmetic(id=${p.cosmeticReference},page=${currentPage})}">Edit</a></td>
+
+ </tr> 
+ </table>
+ <ul class="nav nav-pills">
+ <li th:each="page,status:${pages}">
+ <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+ th:href="@{ ListCosmetics(page=${status.index}, size=${size} ) }"
+ th:text="${status.index }"></a>
+ </li>
+ </ul>
+ 
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>

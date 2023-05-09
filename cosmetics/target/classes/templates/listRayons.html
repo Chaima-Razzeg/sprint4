@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>List of rayons</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+List of rayons </div>
+ <div class="card-body"> 
+ <table class="table table-striped">
+ <tr>
+ <th>Reference</th><th>Rayon name </th><th>Description</th><th>Delete</th><th>Edit</th>
+ </tr> 
+ <tr th:each="p:${rayons.content}">
+ <td th:text="${p.Ref}"></td>
+ <td th:text="${p.nameRan}"></td>
+ <td th:text="${p.descriptionRan}"></td> 
+ <td><a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')"
+ th:href="@{supprimerRayon(id=${p.Ref}, 
+page=${currentPage},size=${size})}">Delete</a></td>
+                        <td><a class="btn btn-primary" th:href="@{modifierRayon(id=${p.Ref})}">Edit</a></td>
+
+ </tr> 
+ </table>
+ <ul class="nav nav-pills">
+ <li th:each="page,status:${pages}">
+ <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+ th:href="@{ ListRayons(page=${status.index}, size=${size} ) }"
+ th:text="${status.index }"></a>
+ </li>
+ </ul>
+ 
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>

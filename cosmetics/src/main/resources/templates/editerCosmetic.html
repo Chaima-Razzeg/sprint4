@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<c:url value="/css/main.css" var="jstlCss" />
+<link href="${jstlCss}" rel="stylesheet" />
+<script type="text/javascript"
+        src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+    <title>Edit cosmetic product</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card-body">
+            <form action="updateCosmetic" method="post">
+                <div class="form-group">
+                    <label class="control-label" th:for="cosmeticReference">Reference:</label>
+                    <input type="text" name="cosmeticReference" th:value="${cosmetic.cosmeticReference}"
+                           readonly class="form-control" id="cosmeticReference"/>
+                </div>
+					  <div class="form-group">
+							<label class="control-label">Name:</label>
+							<input type="text" name="cosmeticName" class="form-control"th:value="${cosmetic.cosmeticName}" />
+							<span th:errors= ${cosmetic.cosmeticName} class="text-danger">
+								</span>
+								</div>          
+				               <div class="form-group">
+				<label class="control-label">Price:</label>
+				 <input type="text" name="itemPrice" class="form-control"th:value="${cosmetic.itemPrice}" />
+				 <span th:errors=${cosmetic.itemPrice} class="text-danger">
+				</span>
+				</div>
+								<div cls="form-group">
+				<label class="control-label">Expiration date :</label>
+				<input type="date" name="date" class="form-control"
+				th:value="${cosmetic.expirationDate}"/>
+				<span th:errors=${cosmetic.expirationDate} class="text-danger">
+				</span>
+				</div> 
+                <div>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+        <br/>
+        <br/>
+        <a href="ListCosmetics">List of cosmetic product</a>
+    </div>
+</div>
+</body>
+</html>
